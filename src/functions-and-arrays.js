@@ -17,8 +17,6 @@ function findLongestWord(wordsArray) {
 
   if (wordsArray.length === 0) {
     return null;
-  } else if (wordsArray.length === 1) {
-    return longestWord;
   }
 
   for (let i = 1; i < wordsArray.length; i++) {
