@@ -216,7 +216,6 @@ function howManyTimes(wordsArr, word) {
 }
 
 
-
 // Iteration #8: Bonus
 const matrix = [
   [8, 2, 22, 97, 38, 15, 0, 40, 0, 75, 4, 5, 7, 78, 52, 12, 50, 77, 91, 8],
@@ -242,19 +241,54 @@ const matrix = [
 ];
 
 function greatestProduct(arr) {
-  let foundOther = false;
-
+  let greatestProduct = 0;
+  
   for (let i = 0; i < arr.length; i++) {
-    for (let j = 0; j < arr[i].length; j++) {
-      if (arr[i][j] !== 1) {
-        return 16;
-      } else {
-        return 1;
+
+    for (let j = 0; j < arr[i].length - 3; j++) {
+      const horizontalCheck = arr[j][i] * arr[j][i+1] * arr[j][i+2] * arr[j][i+3]; 
+      if (horizontalCheck > greatestProduct) {
+        greatestProduct = horizontalCheck;
       }
     }
+
+    for (let j = 0; j < arr[i].length - 3; j++) {
+      const verticalCheck = arr[j][i] * arr[j+1][i] * arr[j+2][i] * arr[j+3][i]; 
+      if (verticalCheck > greatestProduct) {
+        greatestProduct = verticalCheck;
+      }
+    }
+
   }
+  return greatestProduct;
 }
 
+
+function greatestProductOfDiagonals(arr) {
+  let greatestProduct = 0;
+  
+  for (let i = 0; i < arr.length - 3; i++) {
+    let check = false;
+
+    for (let j = 0; j < arr[i].length - 3; j++) {
+      const forwardDiagCheck = arr[j][i] * arr[j+1][i+1] * arr[j+2][i+2] * arr[j+3][i+3]; 
+      if (forwardDiagCheck > greatestProduct) {
+        greatestProduct = forwardDiagCheck;
+      }
+    }
+
+    for (let j = arr[i].length - 1; j >= 3; j--) {
+      const backwardDiagCheck = arr[i][j] * arr[i+1][j-1] * arr[i+2][j-2] * arr[i+3][j-3]; 
+      if (backwardDiagCheck > greatestProduct) {
+        greatestProduct = backwardDiagCheck;
+      }
+    }
+
+  }
+  return greatestProduct;
+}
+
+console.log(greatestProductOfDiagonals(matrix));
 
 
 
